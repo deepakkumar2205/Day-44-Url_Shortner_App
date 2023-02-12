@@ -5,11 +5,11 @@ import { client } from '../index.js';
 const database = 'Url-Shortner'
 
 export async function createUrl(data) {
-    return await client.db(database).collection("urls").insertOne(data);
+    return await client.db(database).collection("urls").insertOne({...data,count:0});
 }
 
 export async function getLongUrl(data) {
-    return  await client.db(database).collection("urls").findOne({shortUrl:data},{projection:{baseUrl:1}});
+    return  await client.db(database).collection("urls").findOne({shortUrl:data},{projection:{baseUrl:1,count:1}});
 }
 
 export async function checkUrl(data) {
@@ -19,6 +19,11 @@ export async function checkUrl(data) {
 export async function getUsersUrls(data) {
 
     return  await client.db(database).collection("urls").find({userId:data}).toArray();
+}
+
+export async function updateCount(data,count) {
+
+    return  await client.db(database).collection("urls").updateOne({_id:data},{$set:{count:count+1}})
 }
 
 export async function deleteShortUrl(data) {

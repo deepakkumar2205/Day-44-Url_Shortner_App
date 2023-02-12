@@ -1,4 +1,5 @@
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
+import { CircularProgress } from '@mui/material';
 import Avatar from '@mui/material/Avatar';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
@@ -18,7 +19,7 @@ import { useNavigate } from 'react-router-dom';
 import * as yup from 'yup';
 import { LoginAction } from '../../../Redux/Reducers/Login.reducer';
 import API from '../../../url';
-import { toastFuncSuccess, toastFuncWarning } from '../../Mainpage/axios';
+import { toastFunc, toastFuncSuccess, toastFuncWarning } from '../../Mainpage/axios';
 
 function Copyright(props) {
   return (
@@ -38,6 +39,7 @@ export default function SignIn() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const loginData = useSelector((state)=>state.login.credentials)
+  const [button, setButton] = React.useState('Sign In');
 
   //! yup validate
   const useValidateSchema = yup.object({
@@ -57,8 +59,8 @@ export default function SignIn() {
     validationSchema:useValidateSchema,
     //! submit form
     onSubmit :(values)=>{
-      console.log(values)
-      dispatch(LoginAction(values))
+      setButton('loading')
+      // dispatch(LoginAction(values))
       axios({
         method:"post",
         url: `${API}/users/login`,
@@ -70,6 +72,7 @@ export default function SignIn() {
         navigate("/urls")
         //toast config below
        toastFuncSuccess('Successfully logged In')
+       toastFunc(`😁 Welcome ${response.data.user} !`)
        }
       }).catch((err)=>{
         console.log(err);
@@ -77,6 +80,7 @@ export default function SignIn() {
            //toast config below
           toastFuncSuccess('Check your email and click the link to verify your E-Mail address and then Signin',)
         }else if(err.response.status === 401){
+          setButton("Sign in")
             //toast config below
            toastFuncWarning('Invalid Credentials')
         }
@@ -106,18 +110,20 @@ export default function SignIn() {
             fullWidth
             label="Email Address"
             name="email"
+            value={values.email}
             onBlur={handleBlur}
             helperText = { errors.email? errors.email: false}
             onChange={handleChange}
             error={touched.email && errors.email? true: false}
-           
-          />
+            
+            />
           <TextField
             margin="normal"
             label="Password"
             fullWidth
             name="password"
             id="password"
+            value={values.password}
             onBlur={handleBlur}
             error={ touched.password && errors.password? true: false}
             helperText = { errors.password? errors.password : false}
@@ -140,7 +146,8 @@ export default function SignIn() {
             variant="contained"
             sx={{ mt: 3, mb: 2 }}
           >
-            Sign In
+            {button === 'loading' ?<CircularProgress color='inherit' size={30}/>:button }
+            
           </Button>
           <Grid container>
             <Grid item xs>

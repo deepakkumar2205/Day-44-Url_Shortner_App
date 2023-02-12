@@ -29,10 +29,27 @@ export async function handleDeleteUrl(ide){
     })
 }
 
+//! Reseting password of the user :
+export async function resetingPassword(string,data){
+    return axios({
+        url:`${API}/users/changePassword/${string}`,
+        method:"post",
+        data:data
+    })
+}
+
 export async function redirectUrl(shortUrl){
     return axios({
         url:`${API}/redirect/${shortUrl}`,
         method:"get",
+    })
+}
+
+//! ResetPassword page is valid or not checking by using string params.
+export async function resetPasswordPageCheck(string){
+    return  axios({
+        method:'get',
+        url:`${API}/users/resetpassword/${string}`
     })
 }
 
@@ -49,7 +66,7 @@ export async function postUrlToDb(values){
 
 export function toastFunc(text) {
      //toast config below
-     toast.error(text, {
+     toast(text, {
         position: "top-center",
         autoClose: 5000,
         hideProgressBar: false,

@@ -1,7 +1,7 @@
 import express from 'express';
 import shortid from 'shortid';
 import { auth } from '../middleware/auth.js';
-import { checkUrl, createUrl, deleteShortUrl, getLongUrl, getUsersUrls } from '../services/urls.service.js';
+import { checkUrl, createUrl, deleteShortUrl, getLongUrl, getUsersUrls, updateCount } from '../services/urls.service.js';
 const router = express.Router();
 
 
@@ -42,6 +42,9 @@ router.post('/handleDeleteUrl',auth,express.json(),async function(request, respo
 router.get('/redirect/:shortUrl',express.json(),async function(request, response){
    const {shortUrl}  = request.params;
    const res = await getLongUrl(shortUrl)
+   if(res !== null){
+      await updateCount(res._id,res.count)
+   }
    response.send(res)
 })
 

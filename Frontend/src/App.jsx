@@ -6,6 +6,7 @@ import Changepassword from './Components/Authentication/Changepassword/Changepas
 import SignIn from './Components/Authentication/Login/Signin'
 import Emailverify from './Components/Authentication/mailVerification/Emailverification'
 import ProtectedRoute from './Components/Authentication/ProtectedRoute'
+import { ResetPassPage } from './Components/Authentication/ResetPassPage/ResetPassPage'
 import ResetPassword from './Components/Authentication/ResetPassword/ResetPassword'
 import SignUp from './Components/Authentication/Signup/Signup'
 import { Home } from './Components/Mainpage/Home'
@@ -25,6 +26,7 @@ function App() {
             <Route path='/changepassword' element={<Changepassword/>}/>
             <Route path='/urls' element={<ProtectedRoute><Urls/></ProtectedRoute>}/>
             <Route path='/resetpassword' element={<ResetPassword/>}/>
+            <Route path='/resetPassPage/:string' element={<ResetPassPage/>}/>
             <Route path='/:shortUrl' element={<Home/>}/>
             <Route path='/emailverify/:string' element={<Emailverify/>}/>
           </Routes>

@@ -55,7 +55,7 @@ function SignUp() {
       .required("Last name is required"),
     password: yup
       .string()
-      .min(8, "Enter a valid Password")
+      .min(8, "Password should have 8 characters")
       .required("Password is required"),
     confirmPassword: yup
       .string()
@@ -69,7 +69,6 @@ function SignUp() {
       validationSchema  : useValidateSchema,
       //! submit form
       onSubmit :(values)=>{
-        console.log(values);
         dispatch(signupAction(values))
       }
   })

@@ -141,6 +141,7 @@ router.post('/login',express.json(),async function(request, response){
               const token = jwt.sign({ foo: userFromDB._id }, process.env.SECRET_KEY);
               response.status(200).send({
                 message: "succeful login",
+                user : `${userFromDB.firstName} ${userFromDB.lastName}`,
                 token: token,
                 roleId: userFromDB.roleId,
                 _id:myobjectId.toString()

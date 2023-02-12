@@ -35,6 +35,7 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
 
 export  function AllocationTableComp() {
   const APIFront = 'https://s-u.netlify.app'
+  const APIFrontShow = 's-u.netlify.app'
   const tableData = useSelector((state)=>state.urls.table)
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -56,6 +57,7 @@ export  function AllocationTableComp() {
       }
 
   return (
+    <div>
     <TableContainer component={Paper} >
       <Table sx={{ minWidth: 700}} aria-label="customized table">
         <TableHead>
@@ -64,19 +66,21 @@ export  function AllocationTableComp() {
             <StyledTableCell width={200}>Title</StyledTableCell>
             <StyledTableCell width={200}  align="right">Base Url</StyledTableCell>
             <StyledTableCell  width={200}   align="right" >Short Url</StyledTableCell>
+            <StyledTableCell align="right">Total Clicks</StyledTableCell>
             <StyledTableCell align="right">Action</StyledTableCell>
           </TableRow>
         </TableHead>
         <TableBody>
           {tableData.map((row,index) => (
             <StyledTableRow key={`${index}`}>
-              <StyledTableCell  component="th" scope="row">{index+1}</StyledTableCell>
-              <StyledTableCell >{row.title}</StyledTableCell>
-              <StyledTableCell style={{inlineSize:'auto', overflow:'hidden',width:"600px",display:'inline-block',wordWrap:"break-word"}} align="right">{row.baseUrl}</StyledTableCell>
-              <StyledTableCell align="right">
-                <a href={`${APIFront}/${row.shortUrl}`}>{row.shortUrl}</a>
+              <StyledTableCell style={{minHeight:"38px"}} component="th" scope="row">{index+1}</StyledTableCell>
+              <StyledTableCell style={{minHeight:"38px"}}>{row.title}</StyledTableCell>
+              <StyledTableCell style={{inlineSize:'auto', overflow:'hidden',width:"600px",display:'inline-block',wordWrap:"break-word",minHeight:"38px"}} align="right">{row.baseUrl}</StyledTableCell>
+              <StyledTableCell align="right" style={{minHeight:"38px"}}>
+                <a href={`${APIFront}/${row.shortUrl}`}>{`${APIFrontShow}/${row.shortUrl}`}</a>
               </StyledTableCell>
-              <StyledTableCell align="right">
+              <StyledTableCell align="right" >{row.count}</StyledTableCell>
+              <StyledTableCell align="right" style={{minHeight:"38px"}}>
               <Button onClick={()=>handleDelete(row._id)}>del</Button>
               </StyledTableCell>
             </StyledTableRow>
@@ -84,6 +88,9 @@ export  function AllocationTableComp() {
         </TableBody>
       </Table>
     </TableContainer>
+    <br/>
+      <marquee direction="right" behavior='alternate'>Created by Deepakkumar 😅</marquee>
+      </div>
   );
 }
 
