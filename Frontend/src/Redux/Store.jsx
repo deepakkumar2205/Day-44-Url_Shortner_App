@@ -15,4 +15,4 @@ export default configureStore({
     theme: ThemeReducer,
     urls:urlsReducer
   },
-});
+}) ;
