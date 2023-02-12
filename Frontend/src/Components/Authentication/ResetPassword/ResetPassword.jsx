@@ -1,4 +1,4 @@
-import LockResetIcon from '@mui/icons-material/LockReset';
+import ForwardToInboxIcon from '@mui/icons-material/ForwardToInbox';
 import Avatar from '@mui/material/Avatar';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
@@ -8,16 +8,14 @@ import Grid from '@mui/material/Grid';
 import Link from '@mui/material/Link';
 import TextField from '@mui/material/TextField';
 import Typography from '@mui/material/Typography';
+import axios from 'axios';
 import { useFormik } from 'formik';
 import * as React from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
 import * as yup from 'yup';
-import { LoginAction } from '../../../Redux/Reducers/Login.reducer';
-import ForwardToInboxIcon from '@mui/icons-material/ForwardToInbox';
-import axios from 'axios';
 import API from '../../../url';
-import { toast } from 'react-toastify'
 
 function Copyright(props) {
   return (
@@ -50,13 +48,11 @@ export default function ResetPassword() {
     validationSchema:useValidateSchema,
     //! submit form
     onSubmit :(values)=>{
-      console.log(values)
       axios({
         method:"post",
         url:`${API}/users/resetpassword`,
         data:values
       }).then((res)=>{
-        console.log(res)
         if(res.status === 200){
             toast.success('Check your email and click the link to reset password', {
                 position: "top-center",
@@ -66,12 +62,11 @@ export default function ResetPassword() {
                 pauseOnHover: true,
                 draggable: true,
                 progress: undefined,
-                theme: localStorage.getItem("theme"),
+                theme: localStorage.getItem("theme") === null ?'light': localStorage.getItem("theme"),
                 });
         }
       })
       .catch((err)=>{
-        console.log(err)
         if(err.response.status === 401){
             toast.error('Invalid Credentials', {
                 position: "top-center",
@@ -81,7 +76,7 @@ export default function ResetPassword() {
                 pauseOnHover: true,
                 draggable: true,
                 progress: undefined,
-                theme: localStorage.getItem("theme"),
+                theme: localStorage.getItem("theme") === null ?'light': localStorage.getItem("theme")
                 });
         }
       })
