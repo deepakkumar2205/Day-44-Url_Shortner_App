@@ -34,7 +34,7 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
 }));
 
 export  function AllocationTableComp() {
-  const APIFront = 'http://localhost:5173'
+  const APIFront = 'https://s-u.netlify.app'
   const tableData = useSelector((state)=>state.urls.table)
   const dispatch = useDispatch();
   const navigate = useNavigate();
