@@ -26,7 +26,7 @@ import  './EmailVerify.css' ;
     }, 1000);
   }
   if(timer === 0){
-    Navigate("/signin")
+    Navigate("/")
   }
 
   return (

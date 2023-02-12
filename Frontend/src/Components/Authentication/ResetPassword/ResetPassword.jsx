@@ -130,7 +130,7 @@ export default function ResetPassword() {
           </Button>
           <Grid container>
             <Grid item xs>
-              <Link onClick={() => navigate("/signin")} variant="body2">
+              <Link onClick={() => navigate("/")} variant="body2">
                 Login page!
               </Link>
             </Grid>

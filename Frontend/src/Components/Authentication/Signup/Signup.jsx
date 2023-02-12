@@ -186,7 +186,7 @@ function SignUp() {
              
               </Grid>
               <Grid item>
-                <Link onClick={()=>navigate('/signin')} variant="body2">
+                <Link onClick={()=>navigate('/')} variant="body2">
                   {"Already Have an Account? Sign in"}
                 </Link>
               </Grid>

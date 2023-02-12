@@ -7,7 +7,7 @@ function ProtectedRoute({ children }) {
       {children}
     </section>;
   } else {
-    return <Navigate replace to='/signin' />;
+    return <Navigate replace to='/' />;
   }
 }
 

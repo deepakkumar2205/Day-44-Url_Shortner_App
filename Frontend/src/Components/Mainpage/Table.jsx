@@ -50,7 +50,7 @@ export  function AllocationTableComp() {
          
          }) .catch((err)=>{
           if(err.request.status === 401){
-              navigate("/signin")
+              navigate("/")
           }
         })
       }

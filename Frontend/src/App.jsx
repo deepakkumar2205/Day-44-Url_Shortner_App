@@ -20,7 +20,7 @@ function App() {
         <div className="App">
           <div style={{margin:"0",padding:'2rem' ,backgroundColor:Theme.palette.background.default ,color:Theme.palette.primary.light}}>
           <Routes>
-            <Route path='/signin' element={<SignIn/>}/>
+            <Route path='/' element={<SignIn/>}/>
             <Route path='/signup' element={<SignUp/>}/>
             <Route path='/changepassword' element={<Changepassword/>}/>
             <Route path='/urls' element={<ProtectedRoute><Urls/></ProtectedRoute>}/>

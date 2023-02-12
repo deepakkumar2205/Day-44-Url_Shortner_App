@@ -61,7 +61,7 @@ import { getUrlsFromDb, handleGenerateShortUrlFromBE, postUrlToDb, toastFunc, to
             toastFuncWarning('ShortUrl Already Exist')
             dispatch(ResetShortUrl())
         }else if(err.request.status === 401){
-          navigate("/signin")
+          navigate("/")
       }
       })
     }

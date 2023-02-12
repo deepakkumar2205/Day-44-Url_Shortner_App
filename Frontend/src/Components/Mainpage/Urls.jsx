@@ -21,7 +21,7 @@ export const Urls = () => {
           </Button>
           <Button onClick={()=>{
             localStorage.removeItem("x-Auth-token")
-            navigate("/signin")
+            navigate("/")
           }}>
             LogOut
           </Button>
