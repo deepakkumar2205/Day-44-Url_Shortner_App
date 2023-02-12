@@ -1,0 +1,35 @@
+import { ThemeProvider } from '@emotion/react'
+import { useSelector } from 'react-redux'
+import { Route, Routes } from 'react-router-dom'
+import './App.css'
+import Changepassword from './Components/Authentication/Changepassword/Changepassword'
+import SignIn from './Components/Authentication/Login/Signin'
+import ProtectedRoute from './Components/Authentication/ProtectedRoute'
+import ResetPassword from './Components/Authentication/ResetPassword/ResetPassword'
+import SignUp from './Components/Authentication/Signup/Signup'
+import { Home } from './Components/Mainpage/Home'
+import { Urls } from './Components/Mainpage/Urls.jsx'
+
+
+function App() {
+  //,background:palette.primary.contrastText ,color:palette.primary.light
+  const Theme = useSelector((state)=>state.theme)
+  return (
+    <ThemeProvider theme={Theme}>
+        <div className="App">
+          <div style={{margin:"0",padding:'2rem' ,backgroundColor:Theme.palette.background.default ,color:Theme.palette.primary.light}}>
+          <Routes>
+            <Route path='/signin' element={<SignIn/>}/>
+            <Route path='/signup' element={<SignUp/>}/>
+            <Route path='/changepassword' element={<Changepassword/>}/>
+            <Route path='/urls' element={<ProtectedRoute><Urls/></ProtectedRoute>}/>
+            <Route path='/resetpassword' element={<ResetPassword/>}/>
+            <Route path='/:shortUrl' element={<Home/>}/>
+          </Routes>
+          </div>
+        </div>
+    </ThemeProvider>
+  )
+}
+
+export default App
