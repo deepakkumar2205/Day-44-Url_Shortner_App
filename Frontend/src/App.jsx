@@ -13,7 +13,7 @@ import { Urls } from './Components/Mainpage/Urls.jsx'
 
 
 function App() {
-  //,background:palette.primary.contrastText ,color:palette.primary.light
+  
   const Theme = useSelector((state)=>state.theme)
   return (
     <ThemeProvider theme={Theme}>
