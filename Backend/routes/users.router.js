@@ -127,11 +127,11 @@ router.get('/verifyToken',auth,express.json(),async function(request,response){
 router.post('/login',express.json(),async function(request, response){
   const {email , password} = request.body;
   const userFromDB = await  getUsers(email);
-  const myobjectId = userFromDB._id
   //!below if condition is used to find the data present in db or not.
   if(userFromDB == null){
     response.status(401).send({message:"Invalid credentials"})
   }else{
+    const myobjectId = userFromDB._id
     //!This if conditon is used to find the user email is verified or not.
     if(userFromDB.emailVerified == 'yes'){    
         const storedDBPassword = userFromDB.password ;

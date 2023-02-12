@@ -10,8 +10,6 @@ export const Urls = createSlice({
   reducers: {
     // WHATEVER YOU WRITE INSIDE IT IS CALLED AS ACTION CREATOR
     TableAction: (state, action) => {
-        console.log(current(state));
-       console.log(action.payload);
        state.table=action.payload
        state.form.shortUrl = "" 
     },

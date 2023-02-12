@@ -4,6 +4,7 @@ import { Route, Routes } from 'react-router-dom'
 import './App.css'
 import Changepassword from './Components/Authentication/Changepassword/Changepassword'
 import SignIn from './Components/Authentication/Login/Signin'
+import Emailverify from './Components/Authentication/mailVerification/Emailverification'
 import ProtectedRoute from './Components/Authentication/ProtectedRoute'
 import ResetPassword from './Components/Authentication/ResetPassword/ResetPassword'
 import SignUp from './Components/Authentication/Signup/Signup'
@@ -25,6 +26,7 @@ function App() {
             <Route path='/urls' element={<ProtectedRoute><Urls/></ProtectedRoute>}/>
             <Route path='/resetpassword' element={<ResetPassword/>}/>
             <Route path='/:shortUrl' element={<Home/>}/>
+            <Route path='/emailverify/:string' element={<Emailverify/>}/>
           </Routes>
           </div>
         </div>
