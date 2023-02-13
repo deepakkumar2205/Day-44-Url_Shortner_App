@@ -38,7 +38,7 @@ export const Signup = createSlice({
                 pauseOnHover: true,
                 draggable: true,
                 progress: undefined,
-                theme: localStorage.getItem("theme"),
+                theme: 'light',
                 });
         }
       })
@@ -54,7 +54,7 @@ export const Signup = createSlice({
             pauseOnHover: true,
             draggable: true,
             progress: undefined,
-            theme: localStorage.getItem("theme"),
+            theme: 'light',
             });
         }
       })
