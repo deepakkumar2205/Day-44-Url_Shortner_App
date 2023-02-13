@@ -1,14 +1,12 @@
 import AutorenewIcon from '@mui/icons-material/Autorenew';
 import { Box, Button, IconButton, TextField, Tooltip } from '@mui/material';
-import axios from 'axios';
-import { useFormik ,useFormikContext } from 'formik';
+import { useFormik } from 'formik';
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import * as yup from 'yup';
 import { FormAction, ResetForm, ResetShortUrl, TableAction } from '../../Redux/Reducers/urls.reducer';
-import API from '../../url';
-import { getUrlsFromDb, handleGenerateShortUrlFromBE, postUrlToDb, toastFunc, toastFuncSuccess, toastFuncWarning } from './axios.jsx';
+import { getUrlsFromDb, handleGenerateShortUrlFromBE, postUrlToDb, toastFuncSuccess, toastFuncWarning } from './axios.jsx';
 
  const Form = () => {
   const initial = useSelector((state)=>state.urls.form)
