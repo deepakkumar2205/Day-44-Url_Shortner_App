@@ -1,4 +1,5 @@
-import * as React from 'react';
+import { Button, CircularProgress, LinearProgress, Tooltip, Zoom } from '@mui/material';
+import Paper from '@mui/material/Paper';
 import { styled } from '@mui/material/styles';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
@@ -6,14 +7,11 @@ import TableCell, { tableCellClasses } from '@mui/material/TableCell';
 import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
-import Paper from '@mui/material/Paper';
+import * as React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { getUrlsFromDb, handleDeleteUrl, toastFuncDanger, toastFuncSuccess } from './axios';
-import { TableAction } from '../../Redux/Reducers/urls.reducer';
-import { Button, Tooltip, Zoom } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
-import 'react-tooltip/dist/react-tooltip.css' ;
-import { Tooltip as ReactTooltip } from "react-tooltip";
+import { TableAction } from '../../Redux/Reducers/urls.reducer';
+import { getUrlsFromDb, handleDeleteUrl, toastFuncDanger } from './axios';
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
@@ -57,9 +55,10 @@ export  function AllocationTableComp() {
           }
         })
       }
-
+  console.log(tableData);
   return (
     <div>
+      {tableData === [] ? <CircularProgress/> :<div>
       <TableContainer component={Paper} >
         <Table sx={{ minWidth: 700 }} aria-label="customized table">
           <TableHead>
@@ -86,7 +85,7 @@ export  function AllocationTableComp() {
                   </p>
                 </Tooltip>
               </StyledTableCell>
-              <StyledTableCell width={200} align="right" style={{textAlign:"center"}}>
+              <StyledTableCell width={200}  style={{textAlign:"center"}}>
               <Tooltip
                   title="This is the original Url what you want to open when access the related short url"
                   arrow
@@ -97,7 +96,7 @@ export  function AllocationTableComp() {
                   </p>
                 </Tooltip>
               </StyledTableCell>
-              <StyledTableCell width={200} align="right" style={{textAlign:"center"}}>
+              <StyledTableCell width={200} style={{textAlign:"center"}}>
               <Tooltip
                   title="Now you can copy and share this shot url to anyone"
                   arrow
@@ -108,7 +107,7 @@ export  function AllocationTableComp() {
                   </p>
                 </Tooltip>
               </StyledTableCell>
-              <StyledTableCell align="right " style={{textAlign:"center"}}>
+              <StyledTableCell style={{textAlign:"center"}}>
                 <Tooltip
                   title="This Total Clicks represent How many short url is used"
                   arrow
@@ -119,7 +118,7 @@ export  function AllocationTableComp() {
                   </p>
                 </Tooltip>
               </StyledTableCell>
-              <StyledTableCell align="right" style={{textAlign:"center"}}>
+              <StyledTableCell  style={{textAlign:"center"}}>
               <Tooltip
                   title={`If you delete short url the link will expire and it show page not found when you try use that url.`}
                   TransitionComponent={Zoom}
@@ -154,17 +153,17 @@ export  function AllocationTableComp() {
                     minHeight: "38px",
                     textAlign:'left'
                   }}
-                  align="right"
+               
                 >
                   {row.baseUrl}
                 </StyledTableCell>
-                <StyledTableCell align="right" style={{ minHeight: "38px",textAlign:'left' }}>
+                <StyledTableCell style={{ minHeight: "38px",textAlign:'left' }}>
                   <a
                     href={`${APIFront}/${row.shortUrl}`}
                   >{`${APIFrontShow}/${row.shortUrl}`}</a>
                 </StyledTableCell>
-                <StyledTableCell align="right" style={{textAlign:'center'}}>{row.count}</StyledTableCell>
-                <StyledTableCell align="right" style={{ minHeight: "38px" ,textAlign:'center'}}>
+                <StyledTableCell  style={{textAlign:'center'}}>{row.count}</StyledTableCell>
+                <StyledTableCell  style={{ minHeight: "38px" ,textAlign:'center'}}>
                   <Button onClick={() => handleDelete(row._id)}>del</Button>
                 </StyledTableCell>
               </StyledTableRow>
@@ -172,11 +171,12 @@ export  function AllocationTableComp() {
           </TableBody>
         </Table>
       </TableContainer>
-
-      <br />
+      <br />  
+     
       <marquee direction="right" behavior="alternate">
         Created by Deepakkumar 😅
       </marquee>
+      </div>}
     </div>
   );
 }
