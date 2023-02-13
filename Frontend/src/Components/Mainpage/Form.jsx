@@ -84,26 +84,26 @@ import { getUrlsFromDb, handleGenerateShortUrlFromBE, postUrlToDb, toastFunc, to
       >
       <TextField 
           id="standard-basic"
-          label="Url Title"
+          label="Title"
           variant="standard"
           name="title"
           onBlur={handleBlur}
           value={values.title}
           type='text'
           onChange={handleChange}
-          helperText={errors.title}
+          helperText={!errors.title ? "eg: github" : errors.title}
           error={touched.title && errors.title? true: false}
       />
       <TextField 
           id="standard-basic"
-          label="Url"
+          label="Base Url"
           name="baseUrl"
           value={values.baseUrl}
           onBlur={handleBlur}
           onChange={handleChange}
           error={touched.baseUrl && errors.baseUrl? true: false}
           variant="standard"
-          helperText={errors.baseUrl}
+          helperText={!errors.baseUrl ? "eg : https://github.com/repository/...":errors.baseUrl}
       />
       <TextField 
           id="standard-basic"
@@ -113,7 +113,7 @@ import { getUrlsFromDb, handleGenerateShortUrlFromBE, postUrlToDb, toastFunc, to
           value={values.shortUrl}
           onChange={handleChange}
           error={touched.shortUrl && errors.shortUrl? true: false}
-          helperText={errors.shortUrl}
+          helperText={!errors.shortUrl ?"eg : github-url":errors.shortUrl}
           variant="standard"
       />
       <Tooltip title='genereate short url'>
