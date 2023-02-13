@@ -113,7 +113,7 @@ import { getUrlsFromDb, handleGenerateShortUrlFromBE, postUrlToDb, toastFunc, to
           value={values.shortUrl}
           onChange={handleChange}
           error={touched.shortUrl && errors.shortUrl? true: false}
-          helperText={!errors.shortUrl ?"eg : github-url":errors.shortUrl}
+          helperText={!errors.shortUrl ?"eg : github-url (or) xowsholw":errors.shortUrl}
           variant="standard"
       />
       <Tooltip title='genereate short url'>
