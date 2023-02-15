@@ -12,12 +12,21 @@ export async function getLongUrl(data) {
     return  await client.db(database).collection("urls").findOne({shortUrl:data},{projection:{baseUrl:1,count:1}});
 }
 
+export async function addData(data) {
+    const id =await client.db(database).collection("urls").findOne({shortUrl:data.shortUrl},{projection:{_id:1,info:1}})
+    return await client.db(database).collection("urls").updateOne({_id:id._id},{$set:{info:[...id.info,{info:data.info , date: data.date}]}});          
+}
+
+
+export async function getData(data) {
+    return await client.db(database).collection("urls").findOne({shortUrl:data},{projection:{info:1}});
+}
+
 export async function checkUrl(data) {
     return await client.db(database).collection("urls").findOne({shortUrl:data});
 }
 
 export async function getUsersUrls(data) {
-
     return  await client.db(database).collection("urls").find({userId:data}).toArray();
 }
 

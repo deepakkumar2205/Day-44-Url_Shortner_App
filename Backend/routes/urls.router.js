@@ -1,7 +1,7 @@
 import express from 'express';
 import shortid from 'shortid';
 import { auth } from '../middleware/auth.js';
-import { checkUrl, createUrl, deleteShortUrl, getLongUrl, getUsersUrls, updateCount } from '../services/urls.service.js';
+import {  addData, checkUrl, createUrl, deleteShortUrl, getData, getLongUrl, getUsersUrls, updateCount } from '../services/urls.service.js';
 const router = express.Router();
 
 
@@ -13,6 +13,26 @@ router.post('/postUrl',auth,express.json(),async function(request, response){
    }else{
       const addurl = await createUrl(data)
       response.status(201).send("created successfully")
+   }
+})
+
+router.post('/postData',express.json(),async function(request, response){
+   const data = request.body;
+   const addUrl = await addData(data);
+   if(addUrl){
+      response.status(200).send("posted successfully")
+   }else{
+      response.status(201).send("error")
+   }
+})
+
+router.post('/getData',express.json(),async function(request, response){
+   const {shortUrl} = request.body;
+   const info = await getData(shortUrl);
+   if(info){
+      response.status(200).send(info.info)
+   }else{
+      response.status(404).send("error")
    }
 })
 

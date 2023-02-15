@@ -64,6 +64,22 @@ export async function postUrlToDb(values){
       })
 }
 
+export async function postData(values){
+    return axios({
+        method:"post",
+        url:`${API}/postData`,
+        data:values
+      })
+}
+
+export async function getData(values){
+    return axios({
+        method:"post",
+        url:`${API}/getData`,
+        data:{shortUrl:values}
+      })
+}
+
 export function toastFunc(text) {
      //toast config below
      toast(text, {

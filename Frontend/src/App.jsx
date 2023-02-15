@@ -10,15 +10,14 @@ import { ResetPassPage } from './Components/Authentication/ResetPassPage/ResetPa
 import ResetPassword from './Components/Authentication/ResetPassword/ResetPassword'
 import SignUp from './Components/Authentication/Signup/Signup'
 import { Home } from './Components/Mainpage/Home'
+import Info from './Components/Mainpage/Info/info'
 import { Urls } from './Components/Mainpage/Urls.jsx'
-import platform from 'platform'
 
 
 
 function App() {
   
   const Theme = useSelector((state)=>state.theme)
-  console.log(platform);
 
   return (
     <ThemeProvider theme={Theme}>
@@ -33,6 +32,7 @@ function App() {
             <Route path='/resetPassPage/:string' element={<ResetPassPage/>}/>
             <Route path='/:shortUrl' element={<Home/>}/>
             <Route path='/emailverify/:string' element={<Emailverify/>}/>
+            <Route path='/info' element={<Info/>}/>
           </Routes>
           </div>
         </div>

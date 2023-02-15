@@ -55,7 +55,6 @@ export  function AllocationTableComp() {
           }
         })
       }
-  console.log(tableData);
   return (
     <div>
       {tableData === [] ? <CircularProgress/> :<div>

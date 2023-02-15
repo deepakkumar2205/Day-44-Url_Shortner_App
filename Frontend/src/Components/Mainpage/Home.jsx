@@ -1,7 +1,7 @@
-import { padding } from '@mui/system';
-import React, { useEffect, useState } from 'react'
-import { useParams } from 'react-router-dom'
-import { redirectUrl } from './axios';
+import platform from 'platform';
+import React, { useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
+import { postData, redirectUrl } from './axios';
 
 export const Home = () => {
   const [state, setState] =useState(true);
@@ -12,7 +12,9 @@ export const Home = () => {
           if(data.data.baseUrl === undefined){
               setState(false)
           }else{
+            postData({info:platform.description,shortUrl:shortUrl,date: new Date()})
             window.location.assign(data.data.baseUrl)
+
           }
          })
          .catch((err) => console.log(err));
