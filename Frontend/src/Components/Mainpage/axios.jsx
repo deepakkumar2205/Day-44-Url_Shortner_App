@@ -60,7 +60,7 @@ export async function postUrlToDb(values){
         headers:{
          'x-Auth-token':localStorage.getItem("x-Auth-token")
         },
-        data:{...values,userId:localStorage.getItem("_id")}
+        data:{...values,userId:localStorage.getItem("_id"),info:[]}
       })
 }
 
