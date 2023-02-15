@@ -11,7 +11,8 @@ export const Home = () => {
          .then((data) => {
           if(data.data.baseUrl === undefined){
               setState(false)
-          }else{
+            }else{
+              window.location.assign(data.data.baseUrl) 
             postData({
               info: description,
               shortUrl: shortUrl,
@@ -19,7 +20,6 @@ export const Home = () => {
               product: product,
               manufacturer: manufacturer,
             });
-            window.location.assign(data.data.baseUrl)
 
           }
          })
