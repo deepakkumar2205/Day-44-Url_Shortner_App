@@ -34,7 +34,7 @@ export default function BasicTable({data ,url}) {
               <TableCell component="th" scope="row">
                 {new Date(row.date).toLocaleString()}
               </TableCell>
-              <TableCell align="right">{row.product === null ? 'PC/Laptop':"Mobile" + row.product}</TableCell>
+              <TableCell align="right">{row.product === null ? 'PC/Laptop': row.product}</TableCell>
               <TableCell align="right">{row.manufacturer === null ? 'Nof found' :row.manufacturer}</TableCell>
               <TableCell align="right">{row.info}</TableCell>
             </TableRow>
