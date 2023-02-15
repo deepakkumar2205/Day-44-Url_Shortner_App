@@ -1,6 +1,6 @@
-import platform from 'platform';
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
+import {product , manufacturer , description} from 'platform';
 import { postData, redirectUrl } from './axios';
 
 export const Home = () => {
@@ -12,7 +12,13 @@ export const Home = () => {
           if(data.data.baseUrl === undefined){
               setState(false)
           }else{
-            postData({info:platform.description,shortUrl:shortUrl,date: new Date()})
+            postData({
+              info: description,
+              shortUrl: shortUrl,
+              date: new Date(),
+              product: product,
+              manufacturer: manufacturer,
+            });
             window.location.assign(data.data.baseUrl)
 
           }

@@ -1,4 +1,4 @@
-import { Button, CircularProgress, LinearProgress, Tooltip, Zoom } from '@mui/material';
+import { Button, CircularProgress, IconButton, LinearProgress, Tooltip, Zoom } from '@mui/material';
 import Paper from '@mui/material/Paper';
 import { styled } from '@mui/material/styles';
 import Table from '@mui/material/Table';
@@ -12,6 +12,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { TableAction } from '../../Redux/Reducers/urls.reducer';
 import { getUrlsFromDb, handleDeleteUrl, toastFuncDanger } from './axios';
+import FileCopyIcon from '@mui/icons-material/FileCopyOutlined';
+import {CopyToClipboard} from 'react-copy-to-clipboard';
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
@@ -33,12 +35,21 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
   },
 }));
 
+
 export  function AllocationTableComp() {
   const APIFront = 'https://s-u.netlify.app'
   const APIFrontShow = 's-u.netlify.app'
   const tableData = useSelector((state)=>state.urls.table)
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const [copy ,setCopy] = React.useState(true);
+  
+  const handleCopy = ()=>{
+    setCopy(false)
+      setTimeout(() => {
+        setCopy(true)
+      }, 5000);
+  }  
 
   function handleDelete(id){
          handleDeleteUrl(id).then((res)=>{
@@ -57,7 +68,7 @@ export  function AllocationTableComp() {
       }
   return (
     <div>
-      {tableData === [] ? <CircularProgress/> :<div>
+      <div>
       <TableContainer component={Paper} >
         <Table sx={{ minWidth: 700 }} aria-label="customized table">
           <TableHead>
@@ -95,6 +106,7 @@ export  function AllocationTableComp() {
                   </p>
                 </Tooltip>
               </StyledTableCell>
+             
               <StyledTableCell width={200} style={{textAlign:"center"}}>
               <Tooltip
                   title="Now you can copy and share this shot url to anyone"
@@ -103,6 +115,17 @@ export  function AllocationTableComp() {
                 >
                   <p id="totalclicks" style={{ margin: "0" }}>
                     Short Url
+                  </p>
+                </Tooltip>
+              </StyledTableCell>
+              <StyledTableCell width={200}  style={{textAlign:"center"}}>
+              <Tooltip
+                  title="Click the below copy button to copy the short url and share it to anyone"
+                  arrow
+                  TransitionComponent={Zoom}
+                >
+                  <p id="totalclicks" style={{ margin: "0" }}>
+                    Copy short Url
                   </p>
                 </Tooltip>
               </StyledTableCell>
@@ -123,14 +146,13 @@ export  function AllocationTableComp() {
                   TransitionComponent={Zoom}
                   arrow
                 >
-                <p id='del' style={{margin:"0"}}>Action</p>
+                <p id='del' style={{margin:"0"}}>Delete Action</p>
                 </Tooltip>
                 </StyledTableCell>
             </TableRow>
           </TableHead>
-
           <TableBody>
-            {tableData.map((row, index) => (
+            {tableData !=='initial' && tableData !=='empty' &&  tableData.map((row, index) => (
               <StyledTableRow key={`${index}`}>
                 <StyledTableCell
                   style={{ minHeight: "38px" }}
@@ -160,6 +182,16 @@ export  function AllocationTableComp() {
                   <a
                     href={`${APIFront}/${row.shortUrl}`}
                   >{`${APIFrontShow}/${row.shortUrl}`}</a>
+                 
+                </StyledTableCell>
+                <StyledTableCell  style={{textAlign:'center'}}>
+                <CopyToClipboard text={`s-u.netlify.app/${row.shortUrl}`} onCopy={()=>handleCopy()}>
+                <Tooltip title={copy ?`Copy : s-u.netlify.app/${row.shortUrl}` :'Copied!'} arrow>
+                    <IconButton>
+                      <FileCopyIcon />
+                    </IconButton>
+                </Tooltip>
+                </CopyToClipboard>
                 </StyledTableCell>
                 <StyledTableCell  style={{textAlign:'center'}}>{row.count}</StyledTableCell>
                 <StyledTableCell  style={{ minHeight: "38px" ,textAlign:'center'}}>
@@ -167,15 +199,20 @@ export  function AllocationTableComp() {
                 </StyledTableCell>
               </StyledTableRow>
             ))}
+            
           </TableBody>
         </Table>
+        {tableData === "initial" && <LinearProgress/> }
+        {tableData === "empty" && <h4>Table is Empty!</h4> }
+
       </TableContainer>
       <br />  
-     
-      <marquee direction="right" behavior="alternate">
-        Created by Deepakkumar 😅
-      </marquee>
-      </div>}
+      <div style={{position:"fixed",right:0,bottom:0,width:"100vw", background:'black'}}>
+        <marquee direction="right" behavior="alternate">
+          Created by Deepakkumar 😅
+        </marquee>
+      </div>
+      </div>
     </div>
   );
 }

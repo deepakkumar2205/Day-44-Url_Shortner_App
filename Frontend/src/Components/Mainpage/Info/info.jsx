@@ -10,7 +10,6 @@ const Info = () => {
     const handleSubmit = ()=>{
       getData(url)
       .then((data)=>{
-        console.log(data)
         setState({flag: true ,info:data.data })
       })
       .catch((err)=>{
@@ -25,6 +24,8 @@ const Info = () => {
         <label>Short Url &nbsp;</label>
         <Input type='text' onChange={(e)=>setUrl(e.target.value)}></Input>
         <button  onClick={()=>handleSubmit()}>Get Info</button>
+        <br/>
+        <br/>
         {state.flag && <BasicTable  data={state.info} url={url}/>}
     </div>
   )

@@ -31,7 +31,11 @@ import { getUrlsFromDb, handleGenerateShortUrlFromBE, postUrlToDb, toastFuncSucc
 
  useEffect(() => {
   getUrlsFromDb().then((res)=>{
-    dispatch(TableAction(res.data))
+    if(res.data.length === 0){
+      dispatch(TableAction("empty"))
+    }else{
+      dispatch(TableAction(res.data))
+    }
   })
  }, [])
  

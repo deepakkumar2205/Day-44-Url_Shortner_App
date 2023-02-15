@@ -8,6 +8,7 @@ import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 
 export default function BasicTable({data ,url}) {
+  
   return (
     <TableContainer component={Paper}>
         <h5>Url:  {url}   </h5>
@@ -16,7 +17,9 @@ export default function BasicTable({data ,url}) {
           <TableRow>
             <TableCell>S.no</TableCell>
             <TableCell>Date</TableCell>
-            <TableCell align="right">Info</TableCell>  
+            <TableCell align="right">Product</TableCell>  
+            <TableCell align="right">Manufacturer</TableCell>  
+            <TableCell align="right">Description</TableCell>  
           </TableRow>
         </TableHead>
         <TableBody>
@@ -31,6 +34,8 @@ export default function BasicTable({data ,url}) {
               <TableCell component="th" scope="row">
                 {new Date(row.date).toLocaleString()}
               </TableCell>
+              <TableCell align="right">{row.product === null ? 'PC/Laptop':"Mobile" + row.product}</TableCell>
+              <TableCell align="right">{row.manufacturer === null ? 'Nof found' :row.manufacturer}</TableCell>
               <TableCell align="right">{row.info}</TableCell>
             </TableRow>
           ))}

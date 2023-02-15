@@ -3,7 +3,7 @@ import { createSlice, current } from '@reduxjs/toolkit';
 export const Urls = createSlice({
   name: 'urls',
   initialState: {
-    table:[],
+    table:"initial",
     form:{title:'',baseUrl:'',shortUrl:''}
   },
 

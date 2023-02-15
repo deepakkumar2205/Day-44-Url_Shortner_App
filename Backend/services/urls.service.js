@@ -12,11 +12,11 @@ export async function getLongUrl(data) {
     return  await client.db(database).collection("urls").findOne({shortUrl:data},{projection:{baseUrl:1,count:1}});
 }
 
-export async function addData(data) {
-    const id =await client.db(database).collection("urls").findOne({shortUrl:data.shortUrl},{projection:{_id:1,info:1}})
-    return await client.db(database).collection("urls").updateOne({_id:id._id},{$set:{info:[...id.info,{info:data.info , date: data.date}]}});          
+export async function addData({info ,date ,shortUrl ,product , manufacturer}) {
+    const id =await client.db(database).collection("urls").findOne({shortUrl:shortUrl},{projection:{_id:1,info:1}})
+    return await client.db(database).collection("urls").updateOne({_id:id._id},{$set:{info:[...id.info,
+        {info:info , date: date,product: product,manufacturer: manufacturer,}]}});          
 }
-
 
 export async function getData(data) {
     return await client.db(database).collection("urls").findOne({shortUrl:data},{projection:{info:1}});
