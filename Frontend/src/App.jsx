@@ -11,11 +11,15 @@ import ResetPassword from './Components/Authentication/ResetPassword/ResetPasswo
 import SignUp from './Components/Authentication/Signup/Signup'
 import { Home } from './Components/Mainpage/Home'
 import { Urls } from './Components/Mainpage/Urls.jsx'
+import platform from 'platform'
+
 
 
 function App() {
   
   const Theme = useSelector((state)=>state.theme)
+  console.log(platform);
+
   return (
     <ThemeProvider theme={Theme}>
         <div className="App">
