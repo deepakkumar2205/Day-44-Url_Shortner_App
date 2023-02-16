@@ -13,13 +13,14 @@ export const Home = () => {
               setState(false)
             }else{
               window.location.assign(data.data.baseUrl) 
-            postData({
-              info: description,
-              shortUrl: shortUrl,
-              date: new Date(),
-              product: product,
-              manufacturer: manufacturer,
-            });
+              //!If you want device monitoring functionality you uncomment this bellow code . I comment this to increase performance boostup.
+            // postData({
+            //   info: description,
+            //   shortUrl: shortUrl,
+            //   date: new Date(),
+            //   product: product,
+            //   manufacturer: manufacturer,
+            // });
 
           }
          })

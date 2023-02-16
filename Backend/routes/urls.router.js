@@ -62,10 +62,10 @@ router.post('/handleDeleteUrl',auth,express.json(),async function(request, respo
 router.get('/redirect/:shortUrl',express.json(),async function(request, response){
    const {shortUrl}  = request.params;
    const res = await getLongUrl(shortUrl)
+   response.send(res)
    if(res !== null){
       await updateCount(res._id,res.count)
    }
-   response.send(res)
 })
 
 export default router
