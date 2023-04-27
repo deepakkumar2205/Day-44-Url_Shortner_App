@@ -44,9 +44,7 @@ const Info = () => {
         <button  onClick={()=>handleSubmit()}>Get Info</button>
         <br/>
         <br/>
-        <div style={{overflow:"scroll",height:""}}>
           {state.flag && <BasicTable  data={state.info} url={url}/>}
-        </div>
     </div>
   )
 }
