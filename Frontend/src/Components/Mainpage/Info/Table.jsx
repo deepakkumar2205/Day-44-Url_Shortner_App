@@ -10,7 +10,7 @@ import Paper from '@mui/material/Paper';
 export default function BasicTable({data ,url}) {
   
   return (
-    <TableContainer component={Paper}>
+    <TableContainer component={Paper} >
         <h5>Url:  {url}   </h5>
       <Table sx={{ minWidth: 650 }} aria-label="simple table">
         <TableHead>

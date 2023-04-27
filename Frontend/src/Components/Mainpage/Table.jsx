@@ -14,6 +14,8 @@ import { TableAction } from '../../Redux/Reducers/urls.reducer';
 import { getUrlsFromDb, handleDeleteUrl, toastFuncDanger } from './axios';
 import FileCopyIcon from '@mui/icons-material/FileCopyOutlined';
 import {CopyToClipboard} from 'react-copy-to-clipboard';
+import InfoIcon from '@mui/icons-material/Info';
+import DeleteIcon from '@mui/icons-material/Delete';
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
@@ -66,6 +68,12 @@ export  function AllocationTableComp() {
           }
         })
       }
+
+  function handleInfo(shorturl){
+       navigate("/info",{state:{shortUrl:shorturl}})
+  }
+
+
   return (
     <div>
       <div>
@@ -149,6 +157,15 @@ export  function AllocationTableComp() {
                 <p id='del' style={{margin:"0"}}>Delete Action</p>
                 </Tooltip>
                 </StyledTableCell>
+              <StyledTableCell  style={{textAlign:"center"}}>
+              <Tooltip
+                  title={`Click to see the device information of the person who is clicked.`}
+                  TransitionComponent={Zoom}
+                  arrow
+                >
+                <p id='del' style={{margin:"0"}}>Info</p>
+                </Tooltip>
+                </StyledTableCell>
             </TableRow>
           </TableHead>
           <TableBody>
@@ -195,7 +212,10 @@ export  function AllocationTableComp() {
                 </StyledTableCell>
                 <StyledTableCell  style={{textAlign:'center'}}>{row.count}</StyledTableCell>
                 <StyledTableCell  style={{ minHeight: "38px" ,textAlign:'center'}}>
-                  <Button onClick={() => handleDelete(row._id)}>del</Button>
+                  <Button onClick={() => handleDelete(row._id)}><DeleteIcon color='error'/></Button>
+                </StyledTableCell>
+                <StyledTableCell  style={{ minHeight: "38px" ,textAlign:'center'}}>
+                  <Button onClick={() => handleInfo(row.shortUrl)}><InfoIcon/></Button>
                 </StyledTableCell>
               </StyledTableRow>
             ))}
